@@ -1,9 +1,10 @@
 """
-Titel: Downloads organizer
+Title: Downloads organizer
 Author: Jan B.
 Date: april 2020
 Version: 1.0
 Python-version: 3.7
+Last updated by: Jordan Leich
 
 This program is designed to organize the contents of a folder by assigning
 files with specific extensions to specific folders.
@@ -41,7 +42,6 @@ SOFTWARE.
 # imports:
 import os
 import shutil
-import sys
 
 
 def create_folders(directories, directory_path):
@@ -123,8 +123,14 @@ def organize_remaining_folders(directories, directory_path):
 
 
 if __name__ == '__main__':
-    directory_path = "C:/Users/jan_b/Downloads"
-    directories = {
+    directory_path = input('Enter the directory you would like to organize or type quit: ')
+    print()
+
+    if directory_path.lower() == 'q' or directory_path.lower() == 'quit':
+        print('Ending organizer...\n')
+        quit()
+
+    directories = {  # All file types that correspond to its own directory
         "HTML": (".html5", ".html", ".htm", ".xhtml"),
         "IMAGES": (".jpeg", ".jpg", ".tiff", ".gif", ".bmp", ".png", ".bpg",
                    "svg",
@@ -154,6 +160,6 @@ if __name__ == '__main__':
         organize_folders(directories, directory_path)
         organize_remaining_files(directory_path)
         organize_remaining_folders(directories, directory_path)
+        print('The organization process is complete!\n')
     except shutil.Error:
         print("There was an error trying to move an item to its destination folder")
-
